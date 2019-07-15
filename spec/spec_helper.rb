@@ -14,7 +14,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-
 ENV['RACK_ENV'] = 'test'
 require_relative '../lib/app.rb'
 
@@ -23,7 +22,6 @@ require 'simplecov'
 require 'simplecov-console'
 
 Capybara.app = WebBookmarkManager
-
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
