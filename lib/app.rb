@@ -13,8 +13,7 @@ class WebBookmarkManager < Sinatra::Base
   end
 
   get '/bookmark' do
-    session['bookmark_manager'] = BookmarkManager.new
-    @bookmarks = session['bookmark_manager'].show_bookmarks
+    @bookmarks = BookmarkManager.show_bookmarks
     erb :bookmarks
   end
 end
