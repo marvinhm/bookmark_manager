@@ -15,7 +15,10 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 ENV['RACK_ENV'] = 'test'
+ENV['ENVIRONMENT'] = 'test'
+
 require_relative '../lib/app.rb'
+require_relative './test_helper.rb'
 
 require 'capybara/rspec'
 require 'simplecov'
@@ -29,6 +32,12 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # SimpleCov::Formatter::HTMLFormatter
 ])
 SimpleCov.start
+
+RSpec.configure do |config|
+  config.before(:each) do
+    test_helper
+  end
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

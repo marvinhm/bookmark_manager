@@ -1,7 +1,20 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/student/Documents/projects/bookmark_manager/spec/features/bookmark_spec.rb": [
+      "/Users/student/Projects/pairingSessions2/bookmark_manager/spec/features/bookmark_spec.rb": [
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/student/Projects/pairingSessions2/bookmark_manager/spec/features/index_spec.rb": [
         null,
         null,
         1,
@@ -12,18 +25,7 @@
         null,
         null
       ],
-      "/Users/student/Documents/projects/bookmark_manager/spec/features/index_spec.rb": [
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/Users/student/Documents/projects/bookmark_manager/spec/units/bookmark_manager_spec.rb": [
+      "/Users/student/Projects/pairingSessions2/bookmark_manager/spec/units/bookmark_manager_spec.rb": [
         null,
         null,
         1,
@@ -32,6 +34,12 @@
         1,
         1,
         1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
         1,
         1,
         1,
@@ -41,6 +49,6 @@
         null
       ]
     },
-    "timestamp": 1563202587
+    "timestamp": 1563206039
   }
 }
