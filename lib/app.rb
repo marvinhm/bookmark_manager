@@ -9,11 +9,20 @@ class WebBookmarkManager < Sinatra::Base
   set :session_secret, 'eleven'
 
   get '/' do
-    'Bookmark Manager'
+    erb :index
   end
 
-  get '/bookmark' do
+  get '/bookmarks' do
     @bookmarks = BookmarkManager.show_bookmarks
     erb :bookmarks
+  end
+
+  get '/add_bookmarks' do
+    erb :add_bookmarks
+  end
+
+  post '/add_bookmarks' do
+    BookmarkManager.create(params[:url])
+    redirect '/bookmarks'
   end
 end
