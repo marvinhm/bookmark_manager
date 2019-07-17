@@ -7,21 +7,30 @@ describe BookmarkManager do
   describe '#show_bookmarks' do
     it 'returns bookmarks' do
 
-      BookmarkManager.create('http://www.makersacademy.com')
-      BookmarkManager.create('http://www.destroyallsoftware.com')
-      BookmarkManager.create('http://www.google.com')
+      bookmark = BookmarkManager.create(url: 'http://www.makersacademy.com', title: 'Makers')
+      BookmarkManager.create(url: 'http://www.destroyallsoftware.com', title: 'Destroy All Software')
+      BookmarkManager.create(url: 'http://www.google.com', title: 'Google')
 
-      bookmark_manager = BookmarkManager.show_bookmarks
-      expect(bookmark_manager).to include 'http://www.google.com'
-      expect(bookmark_manager).to include 'http://www.makersacademy.com'
-      expect(bookmark_manager).to include 'http://www.destroyallsoftware.com'
+      bookmarks = BookmarkManager.show_bookmarks
+
+      expect(bookmarks.length).to eq 3
+      expect(bookmarks.first).to be_a BookmarkManager
+      expect(bookmarks.first.id).to eq bookmark.id
+      expect(bookmarks.first.title).to eq 'Makers'
+      expect(bookmarks.first.url).to eq 'http://www.makersacademy.com'
+
     end
   end
   describe '.create' do
     it 'Should create a new bookmark' do
-      BookmarkManager.create('http://makers.com')
+      bookmark = BookmarkManager.create(url: 'http://www.makersacademy.com', title: 'Makers')
+      persisted_data = PG.connect(dbname: 'bookmark_manager_test').query("SELECT * FROM bookmarks WHERE id = #{bookmark.id};")
 
-      expect(BookmarkManager.show_bookmarks).to include('http://makers.com')
+      expect(bookmark).to be_a BookmarkManager
+      expect(bookmark.id).to eq persisted_data.first['id']
+      expect(bookmark.title).to eq 'Makers'
+      expect(bookmark.url).to eq 'http://www.makersacademy.com'
+
     end
   end
 end

@@ -4,6 +4,15 @@ require 'pg'
 
 # this is the model for Bookmark Manager
 class BookmarkManager
+
+  attr_reader :id, :title, :url
+
+  def initialize(id: id , title: title, url: url)
+    @id = id
+    @title = title
+    @url = url
+  end
+
   def self.show_bookmarks
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
@@ -12,16 +21,19 @@ class BookmarkManager
     end
 
     result = connection.exec("SELECT * FROM bookmarks;")
-    result.map { |bookmark| bookmark['url'] }
+    result.map do |bookmark|
+      BookmarkManager.new(id: bookmark['id'], title: bookmark['title'], url: bookmark['url'])
+    end
   end
 
-  def self.create(url)
+  def self.create(url: , title: )
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
       connection = PG.connect(dbname: 'bookmark_manager')
     end
 
-    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}');")
+    result = connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, url, title")
+    BookmarkManager.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
 end
